@@ -1,60 +1,71 @@
 <p>angform works!</p>
 <h1>hello world</h1>
 <!--here in form action we use local variable #ds as a HtmlFormElement & we put it in a form-->
+<!-- #ds="ngForm" -> To fetch JS object from html -->
 <form (ngSubmit)="OnSubmit(ds)" #ds="ngForm">
-  <!-- #ds="ngForm" -> To fetch JS object from html -->
-  <div class="form-group">
-    <label for="username">UserName</label>
-    <input type="text"
-           id="username"
-           class="form-control"
-           ngModel
-           name="userName"
-           required>
-    <button type="button" class="btn-primary">suggest an user name</button>
-  </div>
 
-  <div class="from-group">
-    <label for="email">E-mail</label>
-    <input type="email"
-           id="email"
-           class="form-control"
-           ngModel
-           name="email"
-           required
-           email
-           #email="ngModel">
-    <!--        here we use #email as a local reference for ngModel -->
-    <!--        with ngModel and name JS recognise name as a java script object -->
-    <!--        registering "name" as controller -->
-    <!--    <p *ngIf="!email.valid && email.touched">Please enter the correct E-Mail address</p>-->
-    <span class="help-block" *ngIf="!email.valid && email.touched">Please enter the correct E-Mail address</span>
-    <!--    we can also use <span> tag here instead of <p> -->
-  </div>
+  <div id="user-data" ngModelGroup="userData" #usersData="ngModelGroup">
+    <!--    user data is local variable -->
+    <div class="form-group">
+      <label for="username">UserName</label>
+      <input type="text"
+             id="username"
+             class="form-control"
+             ngModel
+             name="userName"
+             required>
+    </div>
+    <p *ngIf="!usersData.valid && usersData.touched">use data is invalid</p>
+    <button type="button" class="btn btn-primary">suggest an user name</button>
 
-  <div class="form-group">
-    <label for="secret">Secret Question</label>
-    <!--    the <OPTION> tag must come inside the <SELECT> tag -->
-    <!--    we can also use ngModel as a property inside a form-control tag-->
-    <select class="form-control"
-            id="secret"
-            [ngModel]="defaultQuestion"
-            name="secret"
-            required>
-      <option value="pet">Your first pet</option>
-      <option value="teacher">Your fav teacher</option>
-    </select>
-  </div>
+    <div class="from-group">
+      <label for="email">E-mail</label>
+      <input type="email"
+             id="email"
+             class="form-control"
+             ngModel
+             name="email"
+             placeholder="name@maildomain.com"
+             required
+             email
+             #email="ngModel">
+      <!--        here we use #email as a local reference for ngModel -->
+      <!--        with ngModel and name JS recognise name as a java script object -->
+      <!--        registering "name" as controller -->
+      <!--    <p *ngIf="!email.valid && email.touched">Please enter the correct E-Mail address</p>-->
+      <span class="help-block" *ngIf="!email.valid && email.touched">Please enter the correct E-Mail address</span>
+      <!--    we can also use <span> tag here instead of <p> -->
+    </div>
 
-  <div class="form-group">
-    <textarea name="questionAnswer"
+    <div class="form-group">
+      <label for="secret">Secret Question</label>
+      <!--    the <OPTION> tag must come inside the <SELECT> tag -->
+      <!--    we can also use ngModel as a property inside a form-control tag-->
+      <select class="form-control"
+              id="secret"
+              [ngModel]="defaultQuestion"
+              name="secret"
+              required>
+        <option value="pet">Your first pet</option>
+        <option value="teacher">Your fav teacher</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+    <textarea class="form-control"
+              name="questionAnswer"
               rows="5"
               [(ngModel)]="answer">
     </textarea>
+      <!--    [(ngModel)] is used for the 2way binding -->
+    </div>
+
     <p>Your Text is {{answer}}</p>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!ds.valid">Submit</button>
+    <!-- !ds is local form property and valid will become true only if all REQUIRED values are added -->
+
   </div>
 
 </form>
-
-<button type="submit" class="btn-primary">Submit</button>
 
