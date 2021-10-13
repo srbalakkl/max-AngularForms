@@ -9,6 +9,7 @@ import { NgForm } from "@angular/forms";
 export class AngformComponent implements OnInit {
 
   constructor() { }
+  answer = "";
 
   defaultQuestion = 'teacher';
 

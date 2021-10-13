@@ -46,7 +46,15 @@
     </select>
   </div>
 
-  <button type="submit" class="btn-primary">Submit</button>
+  <div class="form-group">
+    <textarea name="questionAnswer"
+              rows="5"
+              [(ngModel)]="answer">
+    </textarea>
+    <p>Your Text is {{answer}}</p>
+  </div>
 
 </form>
+
+<button type="submit" class="btn-primary">Submit</button>
 
