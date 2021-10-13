@@ -14,7 +14,7 @@ export class AngformComponent implements OnInit {
     console.log("it's running");
   }
 
-  OnSubmit(form : NgForm){
+  OnSubmit(form :NgForm){
     console.log('submitted');
     console.log(form);
   }
