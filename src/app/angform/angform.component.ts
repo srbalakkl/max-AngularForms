@@ -9,9 +9,10 @@ import { NgForm } from "@angular/forms";
 export class AngformComponent implements OnInit {
 
   constructor() { }
-  answer = "";
+  answer = '';
 
   defaultQuestion = 'teacher';
+  gender =['male','female'];
 
   ngOnInit(): void {
     console.log("it's running");

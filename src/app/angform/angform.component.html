@@ -15,7 +15,9 @@
              name="userName"
              required>
     </div>
+
     <p *ngIf="!usersData.valid && usersData.touched">use data is invalid</p>
+
     <button type="button" class="btn btn-primary">suggest an user name</button>
 
     <div class="from-group">
@@ -61,6 +63,16 @@
     </div>
 
     <p>Your Text is {{answer}}</p>
+
+    <label for="gender">Gender :</label>
+    <div *ngFor="let g of gender">
+        <input type="radio"
+               name="gender"
+               id="gender"
+               ngModel
+               [value]="g">
+        {{g}}
+    </div>
 
     <button type="submit" class="btn btn-primary" [disabled]="!ds.valid">Submit</button>
     <!-- !ds is local form property and valid will become true only if all REQUIRED values are added -->
