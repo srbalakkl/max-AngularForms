@@ -10,6 +10,8 @@ export class AngformComponent implements OnInit {
 
   constructor() { }
 
+  defaultQuestion = 'teacher';
+
   ngOnInit(): void {
     console.log("it's running");
   }
