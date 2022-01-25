@@ -27,6 +27,7 @@ export class AngformComponent {
 
     // constructor(public dialog: MatDialog) {
     constructor() {
+      console.log('the df Q =>'+this.defaultQuestion);
     }
 
     suggestUserName() {

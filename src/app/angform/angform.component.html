@@ -3,110 +3,115 @@
 <!--here in form action we use local variable #ds as a HtmlFormElement & we put it in a form-->
 <!-- #ds="ngForm" - To fetch JS object from html -->
 <form #ds="ngForm" (ngSubmit)="OnSubmit()">
-    <!--"name" html attribute is used to get form data using  ngForm(ie., #ds="ngForm") -->
-    <!--    note: we can also use @viewChild() decorator instead of ngForm to get value from user & for validation-->
-    <!--userData is the key name for the ngModelGroup-->
-    <div #usersData="ngModelGroup" id="user-data" ngModelGroup="usersData">
-        <!--    user data is local variable -->
-        <div class="form-group">
-            <label for="username">UserName</label>
-            <!--note: [ngModel] is a 1way communication to retrieve data from TS file
-            but [(ngmodel)] is a 2way communication to retrieve data from TS file and send the data back from Template to ts  vice-versa.
-            eg: check out below userName & <h3>Your data's</h3>-->
-            <input
-                    [(ngModel)]="defUserName"
-                    class="form-control"
-                    id="username"
-                    name="userName"
-                    ngModel
-                    required
-                    type="text">
-        </div>
-
-        <p *ngIf="(!usersData.valid) && usersData.touched">use data is invalid</p>
-
-        <button (click)="suggestUserName()" class="btn btn-primary" type="button">suggest an user name</button>
-
-        <div class="from-group">
-            <label for="email">E-mail</label>
-            <input #emails="ngModel"
-                   class="form-control"
-                   id="email"
-                   name="email"
-                   ngModel
-                   placeholder="name@maildomain.com"
-                   required
-                   type="email">
-            <!--        here we use #email as a local reference for ngModel -->
-            <!--        with ngModel and name JS recognise name as a java script object -->
-            <!--        registering "name" as controller -->
-            <!--    <p *ngIf="!email.valid && email.touched">Please enter the correct E-Mail address</p>-->
-            <span *ngIf="!emails.valid && emails.touched"
-                  class="help-block">Please enter the correct E-Mail address
-            </span>
-            <!--    we can also use <span> tag here instead of <p> -->
-        </div>
-
-        <div class="form-group">
-            <label for="secret">Secret Question</label>
-            <!--    the <OPTION> tag must come inside the <SELECT> tag -->
-            <!--    we can also use ngModel as a property inside a form-control tag-->
-            <select [ngModel]="defaultQuestion"
-                    class="form-control"
-                    id="secret"
-                    name="secret"
-                    required>
-                <option value="pet">Your first pet</option>
-                <option value="teacher">Your fav teacher</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <textarea [(ngModel)]="answer"
-              class="form-control"
-              name="questionAnswer"
-              rows="5">
-            </textarea>
-            <!--    [(ngModel)] is used for the 2way binding -->
-        </div>
-
-        <p>Your Text is {{answer}}</p>
-
-        <label for="genderID">Gender :</label>
-        <div *ngFor="let gender of gender">
-            <input [value]="gender"
-                   id="genderID"
-                   name="gender"
-                   ngModel
-                   type="radio">
-            {{gender}}
-        </div>
-
-        <button [disabled]="!ds.valid" class="btn btn-primary" type="submit">Submit</button>
-        <!-- !ds is local form property and valid will become true only if all REQUIRED values are added -->
-        <hr>
-
-        <div class="row">
-            <div class="col-xs-12">
-                <h3>Your data's</h3>
-                <p>user name:{{defUserName}}</p>
-                <p>email:{{emails.value}}</p>
-                <p>email:{{user.email}}</p>
-                <p>secret question:{{defaultQuestion}}</p>
-                <p>secret answer:{{user.questionAnswer}}</p>
-                <p>gender:{{user.gender}}</p>
-            </div>
-        </div>
-
+  <!--"name" html attribute is used to get form data using  ngForm(ie., #ds="ngForm") -->
+  <!--    note: we can also use @viewChild() decorator instead of ngForm to get value from user & for validation-->
+  <!--userData is the key name for the ngModelGroup-->
+  <div #usersData="ngModelGroup" id="user-data" ngModelGroup="usersData">
+    <!--    user data is local variable -->
+    <div class="form-group">
+      <label for="username">UserName</label>
+      <!--note:
+       [ngModel] is a 1way communication to retrieve data from TS file
+      but [(ngmodel)] is a 2way communication.
+      if we use this method then we can retrieve the values even in the html template using interpolation method{{}}
+      eg: check out below userName & <h3>Your data's</h3>.
+      if we use
+      [ngModel]="defUserName" instead of
+      [(ngModel)]="defUserName"
+      then No value will be displayed in the
+      <p> enterd input value is {{defUserName}}</p>
+      tag.
+      -->
+      <input
+        [(ngModel)]="defUserName"
+        class="form-control"
+        id="username"
+        name="userName"
+        ngModel
+        required
+        type="text">
     </div>
+
+    <p> enterd input value is {{defUserName}}</p>
+
+    <p *ngIf="(!usersData.valid) && usersData.touched">use data is invalid</p>
+
+
+    <button (click)="suggestUserName()" class="btn btn-primary" type="button">suggest an user name</button>
+
+    <div class="from-group">
+      <label for="email">E-mail</label>
+      <input #emails="ngModel"
+             class="form-control"
+             id="email"
+             name="email"
+             ngModel
+             placeholder="name@maildomain.com"
+             required
+             type="email">
+      <!--        here we use #email as a local reference for ngModel -->
+      <!--        with ngModel and name JS recognise name as a java script object -->
+      <!--        registering "name" as controller -->
+      <!--    <p *ngIf="!email.valid && email.touched">Please enter the correct E-Mail address</p>-->
+      <span *ngIf="!emails.valid && emails.touched" class="help-block">
+              Please enter the correct E-Mail address
+            </span>
+      <!--    we can also use <span> tag here instead of <p> -->
+    </div>
+
+    <div class="form-group">
+      <label for="secret">Secret Question</label>
+      <!--    the <OPTION> tag must come inside the <SELECT> tag -->
+      <!--    we can also use ngModel as a property inside a form-control tag-->
+      <select [ngModel]="defaultQuestion"
+              class="form-control"
+              id="secret"
+              name="secret"
+              required>
+        <option value="pet">Your first pet</option>
+        <option value="teacher">Your fav teacher</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+            <textarea [(ngModel)]="answer"
+                      class="form-control"
+                      name="questionAnswer"
+                      rows="5">
+            </textarea>
+      <!--    [(ngModel)] is used for the 2way binding -->
+    </div>
+
+    <p>Your Text is {{answer}}</p>
+
+    <label for="genderID">Gender :</label>
+    <div *ngFor="let gender of gender">
+      <input [value]="gender"
+             id="genderID"
+             name="gender"
+             ngModel
+             type="radio">
+      {{gender}}
+    </div>
+
+    <button [disabled]="!ds.valid" class="btn btn-primary" type="submit">Submit</button>
+    <!-- !ds is local form property and valid will become true only if all REQUIRED values are added -->
+    <hr>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Your data's</h3>
+        <p>user name:{{defUserName}}</p>
+        <p>email:{{emails.value}}</p>
+        <p>email:{{user.email}}</p>
+        <p>secret question:{{defaultQuestion}}</p>
+        <p>secret answer:{{user.questionAnswer}}</p>
+        <p>gender:{{user.gender}}</p>
+      </div>
+    </div>
+
+  </div>
 </form>
-
-
-
-
-
-
-
 
 
 <!--
